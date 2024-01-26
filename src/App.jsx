@@ -14,7 +14,12 @@ function App() {
   // Inicializar el estado del tablero[board] dependiendo si tengo algún valor almacenado el localStorage 
   const [board, setBoard] = useState(() => {
     const storedBoard = window.localStorage.getItem('board');
-    return storedBoard ? JSON.parse(storedBoard) : Array(9).fill(null);
+    try {
+      return storedBoard ? JSON.parse(storedBoard) : Array(9).fill(null);
+    } catch (error) {
+      console.error('Error parsing storedBoard:', storedBoard, error);
+      return Array(9).fill(null);
+    }
   });
     
 
